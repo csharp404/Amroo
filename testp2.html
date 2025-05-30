@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نموذج طلب موافقة على التدريب الميداني</title>
+  <style>
+    /* لا تغيير على CSS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
+      background: #f5f5f5;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .form-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .university-info {
+      text-align: center;
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .note {
+      color: #e74c3c;
+      text-align: center;
+      font-size: 13px;
+      margin-bottom: 20px;
+      padding: 8px;
+      background-color: #fdeaea;
+      border-radius: 4px;
+    }
+    .section {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    h2 {
+      color: #2980b9;
+      font-size: 18px;
+      margin-bottom: 15px;
+      padding-right: 8px;
+      border-right: 3px solid #3498db;
+    }
+    label {
+      display: block;
+      color: #444;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      background-color: #f9f9f9;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .form-row > div {
+      flex: 1;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto 0;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    .task-input {
+      margin-bottom: 8px;
+    }
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      body {
+        padding: 10px;
+      }
+      .form-container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>نموذج طلب موافقة على التدريب الميداني</h1>
+    <div class="university-info">جامعة آل البيت - قسم نظم المعلومات</div>
+    <div class="note">* يُعبأ من قبل الطالب المتدرب</div>
+
+    <!-- معلومات الطالب -->
+    <div class="section">
+      <h2>معلومات الطالب</h2>
+      <div class="form-row">
+        <div>
+          <label>الرقم الجامعي</label>
+          <input type="text" id="studentId" value=""  />
+        </div>
+        <div>
+          <label>الفصل الدراسي المسجل فيه مادة التدريب</label>
+          <input type="number" id="semesterInternship" placeholder="مثال: 1" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>الفصل الدراسي المتوقع التخرج فيه</label>
+          <select id="semesterGraduate" required>
+            <option value="0">الفصل الأول 2024/2025</option>
+            <option value="1">الفصل الثاني 2024/2025</option>
+            <option value="2">الفصل الأول 2025/2026</option>
+            <option value="3">الفصل الثاني 2025/2026</option>
+          </select>
+        </div>
+        <div>
+          <label>عدد الساعات المتبقية للتخرج</label>
+          <input type="number" id="numberOfHours" placeholder="عدد الساعات" min="0" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="email" placeholder="example@email.com" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- معلومات جهة التدريب -->
+    <div class="section">
+      <h2>معلومات جهة التدريب</h2>
+      <div class="form-row">
+        <div>
+          <label>اسم الجهة</label>
+          <input type="text" id="companyName" placeholder="اسم الجهة" required />
+        </div>
+        <div>
+          <label>عنوان الجهة</label>
+          <input type="text" id="address" placeholder="العنوان الكامل للجهة" required />
+        </div>
+      </div>
+      <label>وصف مختصر لنشاط الجهة</label>
+      <textarea id="description" rows="3" required></textarea>
+    </div>
+
+    <!-- خطة التدريب -->
+    <div class="section">
+      <h2>خطة التدريب</h2>
+      <label>نوع التدريب</label>
+      <select id="typeOfInternship" required>
+        <option value="" disabled selected>اختر نوع التدريب</option>
+        <option value="development">تطوير برمجيات</option>
+        <option value="database">قواعد بيانات</option>
+        <option value="network">شبكات وأمن معلومات</option>
+        <option value="analysis">تحليل نظم</option>
+        <option value="other">أخرى</option>
+      </select>
+    </div>
+
+    <!-- الجدول الزمني -->
+    <div class="section">
+      <h2>الجدول الزمني المقترح</h2>
+      <table id="scheduleTable">
+        <thead>
+          <tr>
+            <th>اليوم</th>
+            <th>متاح للتدريب</th>
+            <th>وقت البدء</th>
+            <th>وقت الانتهاء</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>الأحد</td>
+            <td><select><option value="yes">نعم</option><option value="no">لا</option></select></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+          <tr>
+            <td>الاثنين</td>
+            <td><select><option value="yes">نعم</option><option value="no">لا</option></select></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+          <tr>
+            <td>الثلاثاء</td>
+            <td><select><option value="yes">نعم</option><option value="no">لا</option></select></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+          <tr>
+            <td>الأربعاء</td>
+            <td><select><option value="yes">نعم</option><option value="no">لا</option></select></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+          <tr>
+            <td>الخميس</td>
+            <td><select><option value="yes">نعم</option><option value="no">لا</option></select></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button type="submit" onclick="submitInternship()">تقديم الطلب</button>
+  </div>
+
+  <script>
+    function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+    function getToken() {
+  const cookieToken = getCookie('token');
+  const localStorageToken = localStorage.getItem('token');
+  return cookieToken || localStorageToken;
+}
+ const token = getToken();
+    function submitInternship() {
+      const studentId = document.getElementById("studentId").value;
+      const semesterInternship = parseInt(document.getElementById("semesterInternship").value);
+      const semesterGraduate = parseInt(document.getElementById("semesterGraduate").value);
+      const numberOfHours = parseInt(document.getElementById("numberOfHours").value);
+      const companyName = document.getElementById("companyName").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const typeOfInternship = document.getElementById("typeOfInternship").value;
+
+      if (!semesterInternship || !companyName || !address || !email || !description || !typeOfInternship) {
+        alert("يرجى ملء جميع الحقول المطلوبة.");
+        return;
+      }
+
+      const scheduleRows = document.querySelectorAll("#scheduleTable tbody tr");
+      const schedules = [];
+
+      let valid = true;
+      scheduleRows.forEach(row => {
+        const available = row.querySelector("select").value === "yes";
+        if (available) {
+          const startInput = row.cells[2].querySelector("input").value;
+          const endInput = row.cells[3].querySelector("input").value;
+
+          if (!startInput || !endInput) {
+            valid = false;
+            return;
+          }
+
+          const startDate = new Date(`1970-01-01T${startInput}:00`).toISOString();
+          const endDate = new Date(`1970-01-01T${endInput}:00`).toISOString();
+
+          schedules.push({
+            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            status: "Active",
+            startTime: startDate,
+            endTime: endDate
+          });
+        }
+      });
+
+      if (!valid) {
+        alert("يرجى إدخال أوقات البدء والانتهاء لجميع الأيام المتوفرة.");
+        return;
+      }
+
+      const payload = {
+        semesterGraduate,
+        semesterInternship,
+        numberOfHours,
+        companyName,
+        address,
+        email,
+        description,
+        typeOfInternship,
+        studentId,
+        reports: [{
+          id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          number: 1,
+          start: new Date().toISOString(),
+          end: new Date().toISOString()
+        }],
+        scheduals: schedules // ⚠️ اسم الحقل كما هو في الـAPI (قد يكون خطأ إملائي)
+      };
+
+      fetch("https://localhost:7133/api/Internship/Create-Internship-To-Doctor", {
+        method: "POST",
+        headers: {
+          'authorization':`Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (!response.ok) throw new Error("فشل في إرسال البيانات");
+        return response.json();
+      })
+      .then(data => {
+        alert("تم تقديم الطلب بنجاح!");
+        console.log("البيانات المرسلة:", data);
+      })
+      .catch(error => {
+        alert("حدث خطأ أثناء تقديم الطلب.");
+        console.error("خطأ:", error);
+      });
+    }
+  </script>
+</body>
+</html>

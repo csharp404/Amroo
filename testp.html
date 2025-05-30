@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقرير الدوري للتدريب الميداني</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 22px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .report-number {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+
+        .date-range {
+            color: #555;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .note {
+            color: #e74c3c;
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 20px;
+            padding: 8px;
+            background-color: #fdeaea;
+            border-radius: 4px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h2 {
+            color: #2980b9;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-right: 8px;
+            border-right: 3px solid #3498db;
+        }
+
+        label {
+            display: block;
+            color: #444;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            background-color: #f9f9f9;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row > div {
+            flex: 1;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .task-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .task-section h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .file-upload {
+            margin-bottom: 15px;
+        }
+
+        .file-upload label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .file-upload label span {
+            margin-left: 5px;
+            color: #777;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            body {
+                padding: 10px;
+            }
+            
+            .form-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="report-header">
+            <h1>التقرير الدوري <span class="report-number" id="reportNumber">1</span> للتدريب الميداني</h1>
+            <div class="date-range">للفترة من <input type="date" id="startDate"> إلى <input type="date" id="endDate"></div>
+            <div class="note">* يتم تعبئة التقرير من قبل الطالب نفسه ويكون مسؤولًا عن صحة المعلومات</div>
+        </div>
+
+        <!-- الجزء الأول: معلومات أساسية -->
+        <div class="section">
+            <h2>المعلومات الأساسية</h2>
+            <div class="form-row">
+                <div>
+                    <label>اسم الطالب</label>
+                    <input type="text" placeholder="الاسم ثلاثي" required>
+                </div>
+                <div>
+                    <label>الرقم الجامعي</label>
+                    <input type="text" placeholder="أدخل رقمك الجامعي" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label>جهة التدريب</label>
+                    <input type="text" placeholder="اسم الجهة" required>
+                </div>
+                <div>
+                    <label>مشرف التدريب بالجهة</label>
+                    <input type="text" placeholder="اسم المشرف" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label>هاتف المشرف</label>
+                    <input type="tel" placeholder="رقم الهاتف" required>
+                </div>
+                <div>
+                    <label>البريد الإلكتروني للمشرف</label>
+                    <input type="email" placeholder="email@company.com" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label>عدد أيام التقرير</label>
+                    <input type="number" min="1" placeholder="عدد الأيام" required>
+                </div>
+                <div>
+                    <label>إجمالي ساعات التدريب</label>
+                    <input type="number" min="1" placeholder="عدد الساعات" required>
+                </div>
+            </div>
+            <label>ملخص عام عن أنشطة التدريب خلال هذه الفترة</label>
+            <textarea placeholder="صف ما قمت به خلال فترة التقرير" rows="4" required></textarea>
+        </div>
+
+        <!-- الجزء الثاني: المهام والأنشطة -->
+        <div class="section">
+            <h2>المهام والأنشطة</h2>
+            
+            <table id="tasksTable">
+                <thead>
+                    <tr>
+                        <th width="25%">نوع المهمة</th>
+                        <th width="50%">وصف المهمة</th>
+                        <th width="25%">حالة الإنجاز</th>
+                    </tr>
+                </thead>
+                <tbody id="tasksTableBody">
+                    <tr>
+                        <td>
+                            <select required>
+                                <option value="" disabled selected>اختر نوع المهمة</option>
+                                <option value="programming">برمجة وتطوير</option>
+                                <option value="analysis">تحليل نظم</option>
+                                <option value="testing">اختبار وتجربة</option>
+                                <option value="documentation">توثيق</option>
+                                <option value="meeting">اجتماعات</option>
+                                <option value="training">تدريب</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="وصف تفصيلي للمهمة" required></td>
+                        <td>
+                            <select required>
+                                <option value="completed">مكتملة</option>
+                                <option value="in-progress">قيد التنفيذ</option>
+                                <option value="not-started">لم تبدأ بعد</option>
+                                <option value="postponed">مؤجلة</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button type="button" id="addTaskBtn" style="margin: 10px 0; padding: 8px 15px; background-color: #f8f9fa; color: #3498db; border: 1px dashed #3498db;">+ إضافة مهمة أخرى</button>
+            
+            <label>تقييم المشرف للأداء</label>
+            <textarea placeholder="ملاحظات المشرف على أداء الطالب (يتم تعبئتها من قبل المشرف)" rows="3"></textarea>
+            
+            <div class="form-row">
+                <div>
+                    <label>اسم المشرف</label>
+                    <input type="text" placeholder="اسم المشرف بالكامل">
+                </div>
+                <div>
+                    <label>التاريخ</label>
+                    <input type="date">
+                </div>
+            </div>
+        </div>
+
+        <!-- الجزء الثالث: تفاصيل المهام -->
+        <div class="section">
+            <h2>تفاصيل المهام المنجزة</h2>
+            
+            <div class="task-section" id="taskDetailsContainer">
+                <div class="task-detail" id="taskDetail1">
+                    <h3>المهمة 1</h3>
+                    <div class="form-row">
+                        <div>
+                            <label>اسم المهمة</label>
+                            <input type="text" placeholder="عنوان المهمة" required>
+                        </div>
+                        <div>
+                            <label>تاريخ التنفيذ</label>
+                            <input type="date" required>
+                        </div>
+                    </div>
+                    
+                    <label>وصف المهمة</label>
+                    <textarea placeholder="وصف تفصيلي للمهمة والأهداف منها" rows="3" required></textarea>
+                    
+                    <label>الأدوات والتقنيات المستخدمة</label>
+                    <input type="text" placeholder="اللغات، البرمجيات، الأدوات..." required>
+                    
+                    <div class="file-upload">
+                        <label>إرفاق ملفات داعمة <span>(PDF, صور، ملفات نصية)</span></label>
+                        <input type="file" multiple>
+                    </div>
+                    
+                    <label>الصعوبات التي واجهتها</label>
+                    <textarea placeholder="اذكر التحديات وكيفية التغلب عليها" rows="2"></textarea>
+                    
+                    <label>الدروس المستفادة</label>
+                    <textarea placeholder="ما هي المهارات والمعارف الجديدة التي اكتسبتها؟" rows="2"></textarea>
+                </div>
+            </div>
+            
+            <button type="button" id="addTaskDetailBtn" style="margin: 10px 0; padding: 8px 15px; background-color: #f8f9fa; color: #3498db; border: 1px dashed #3498db;">+ إضافة مهمة أخرى</button>
+        </div>
+
+        <!-- الجزء الرابع: التقييم النهائي -->
+        <div class="section">
+            <h2>التقييم النهائي</h2>
+            
+            <label>التقييم الذاتي للطالب</label>
+            <select required>
+                <option value="" disabled selected>اختر تقييمك لأدائك</option>
+                <option value="excellent">ممتاز - تجاوزت التوقعات</option>
+                <option value="very-good">جيد جداً - حققت جميع الأهداف</option>
+                <option value="good">جيد - حققت معظم الأهداف</option>
+                <option value="acceptable">مقبول - حققت بعض الأهداف</option>
+                <option value="weak">ضعيف - لم أحقق الأهداف المطلوبة</option>
+            </select>
+            
+            <label>ملاحظات إضافية</label>
+            <textarea placeholder="أي ملاحظات أخرى تريد إضافتها" rows="3"></textarea>
+            
+            <div class="form-row">
+                <div>
+                    <label>اسم الطالب</label>
+                    <input type="text" placeholder="الاسم ثلاثي" required>
+                </div>
+                <div>
+                    <label>التاريخ</label>
+                    <input type="date" required>
+                </div>
+            </div>
+            
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin-top: 20px;">
+                <p style="margin-bottom: 10px;">أتعهد بأن جميع المعلومات المقدمة صحيحة وكاملة</p>
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" required style="width: auto; margin-left: 10px;">
+                    أوافق على الشروط وأتعهد بمصداقية المعلومات
+                </label>
+            </div>
+        </div>
+
+        <button type="submit">إرسال التقرير</button>
+    </div>
+
+    <script>
+        // جعل رقم التقرير متغيراً
+        document.addEventListener('DOMContentLoaded', function() {
+            // يمكنك جلب رقم التقرير من مصدر بيانات أو من URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const reportNum = urlParams.get('reportNum') || 1;
+            document.getElementById('reportNumber').textContent = reportNum;
+            
+            // تعيين تاريخ اليوم كتاريخ افتراضي
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').value = today;
+            document.getElementById('endDate').value = today;
+            
+            // متغير لحساب عدد المهام المضافة
+            let taskCount = 1;
+            let taskDetailCount = 1;
+            
+            // إضافة مهمة جديدة إلى الجدول
+            document.getElementById('addTaskBtn').addEventListener('click', function() {
+                taskCount++;
+                const tbody = document.getElementById('tasksTableBody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>
+                        <select required>
+                            <option value="" disabled selected>اختر نوع المهمة</option>
+                            <option value="programming">برمجة وتطوير</option>
+                            <option value="analysis">تحليل نظم</option>
+                            <option value="testing">اختبار وتجربة</option>
+                            <option value="documentation">توثيق</option>
+                            <option value="meeting">اجتماعات</option>
+                            <option value="training">تدريب</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="وصف تفصيلي للمهمة" required></td>
+                    <td>
+                        <select required>
+                            <option value="completed">مكتملة</option>
+                            <option value="in-progress">قيد التنفيذ</option>
+                            <option value="not-started">لم تبدأ بعد</option>
+                            <option value="postponed">مؤجلة</option>
+                        </select>
+                    </td>
+                `;
+                tbody.appendChild(newRow);
+            });
+            
+            // إضافة مهمة جديدة إلى قسم تفاصيل المهام
+            document.getElementById('addTaskDetailBtn').addEventListener('click', function() {
+                taskDetailCount++;
+                const container = document.getElementById('taskDetailsContainer');
+                const newTaskDetail = document.createElement('div');
+                newTaskDetail.className = 'task-detail';
+                newTaskDetail.id = 'taskDetail' + taskDetailCount;
+                newTaskDetail.innerHTML = `
+                    <h3>المهمة ${taskDetailCount}</h3>
+                    <div class="form-row">
+                        <div>
+                            <label>اسم المهمة</label>
+                            <input type="text" placeholder="عنوان المهمة" required>
+                        </div>
+                        <div>
+                            <label>تاريخ التنفيذ</label>
+                            <input type="date" required>
+                        </div>
+                    </div>
+                    
+                    <label>وصف المهمة</label>
+                    <textarea placeholder="وصف تفصيلي للمهمة والأهداف منها" rows="3" required></textarea>
+                    
+                    <label>الأدوات والتقنيات المستخدمة</label>
+                    <input type="text" placeholder="اللغات، البرمجيات، الأدوات..." required>
+                    
+                    <div class="file-upload">
+                        <label>إرفاق ملفات داعمة <span>(PDF, صور، ملفات نصية)</span></label>
+                        <input type="file" multiple>
+                    </div>
+                    
+                    <label>الصعوبات التي واجهتها</label>
+                    <textarea placeholder="اذكر التحديات وكيفية التغلب عليها" rows="2"></textarea>
+                    
+                    <label>الدروس المستفادة</label>
+                    <textarea placeholder="ما هي المهارات والمعارف الجديدة التي اكتسبتها؟" rows="2"></textarea>
+                `;
+                container.appendChild(newTaskDetail);
+            });
+        });
+    </script>
+</body>
+</html>

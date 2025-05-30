@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css " />
+    <link rel="stylesheet" href="grad.css" />
+    <link rel="icon" type="image/png" href="standard_jpg.jpg">
+    <title>جدول المواعيد</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>جدول المواعيد</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>التاريخ</th>
+                        <th>الوقت</th>
+                        <th>اسم الطالب</th>
+                        <th>اسم المشرف</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentTableBody">
+                    <!-- المواعيد ستُضاف ديناميكيًا هنا -->
+                    <tr>
+                        <td>2025-04-05</td>
+                        <td>10:00 صباحًا</td>
+                        <td>محمد أحمد</td>
+                        <td>د. عمر الخطاب</td>
+                        <td>مؤكد</td>
+                    </tr>
+                    <tr>
+                        <td>2025-04-06</td>
+                        <td>11:30 صباحًا</td>
+                        <td>نور عبد الرحمن</td>
+                        <td>د. سارة ناصر</td>
+                        <td>في الانتظار</td>
+                    </tr>
+                    <tr>
+                        <td>2025-04-07</td>
+                        <td>02:00 مساءً</td>
+                        <td>ياسر محمود</td>
+                        <td>د. لينا محمد</td>
+                        <td>ملغي</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-container">
+            <form id="appointmentForm">
+                <h2>طلب موعد جديد</h2>
+                <input type="date" id="date" placeholder="التاريخ" required />
+                <button type="submit">طلب موعد</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- <script src="grad.js"></script> -->
+</body>
+
+</html>

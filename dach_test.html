@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>لوحة تحكم المشرف</title>
+  <link rel="stylesheet" href="dach_test.css" />
+  <link rel="icon" type="image/png" href="standard_jpg.jpg" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>القائمة</h2>
+      <button onclick="showSection('graduation')">مشاريع التخرج <span id="count-graduation">0</span></button>
+      <button onclick="showSection('training')">التدريب الميداني <span id="count-training">0</span></button>
+
+      <!-- Submenu للتدريب الميداني -->
+      <div id="training-submenu" class="submenu">
+        <button onclick="showTrainingSection('reports')">طلبات التدريب 1</button>
+        <button onclick="showTrainingSection('evaluations')">طلبات التدريب 2</button>
+      </div>
+
+      <button onclick="showSection('appointments')">المواعيد</button>
+      <button onclick="showSection('details')">تفاصيل الطلاب</button>
+      <button class="logout-btn" onclick="window.location.href='index.html'">تسجيل الخروج</button>
+    </aside>
+
+    <main class="main-content">
+      <header><h1>لوحة تحكم المشرف</h1></header>
+
+      <!-- مشاريع التخرج -->
+      <section id="graduation" class="table-section active">
+        <h2>مشاريع التخرج</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>اسم الطالب</th>
+              <th>عنوان المشروع</th>
+              <th>الملف</th>
+              <th>الحالة</th>
+              <th>خيارات</th>
+            </tr>
+          </thead>
+          <tbody id="graduation-body"></tbody>
+        </table>
+      </section>
+
+      <!-- التدريب الميداني -->
+      <section id="training" class="table-section">
+        <h2>التدريب الميداني</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>اسم الطالب</th>
+              <th>اسم الجهة التدريبية</th>
+              <th>تقرير التدريب</th>
+              <th>الحالة</th>
+              <th>خيارات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>سارة علي</td>
+              <td>شركة الاتصالات الأردنية</td>
+              <td><button onclick="window.location.href='request_inter.html'">عرض التقرير</button></td>
+              <td>قيد المراجعة</td>
+              <td class="actions">
+                <button class="approve" onclick="updateStatus(this, 1)">مقبول</button>
+                <button class="reject" onclick="updateStatus(this, 3)">مرفوض</button>
+                <button class="modify" onclick="updateStatus(this, 2)">تعديل</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- طلبات التدريب 1 -->
+      <section id="training-reports" class="table-section">
+        <h2>طلبات التدريب 1</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>اسم الطالب</th>
+              <th>اسم الجهة</th>
+              <th>ملف التقرير</th>
+              <th>الحالة</th>
+              <th>خيارات</th>
+            </tr>
+          </thead>
+          <tbody id="training-reports-body">
+            <tr>
+              <td>محمد أحمد</td>
+              <td>شركة زين للتكنولوجيا</td>
+              <td><button onclick="window.location.href='report1.pdf'">تحميل التقرير</button></td>
+              <td>قيد المراجعة</td>
+              <td class="actions">
+                <button class="approve" onclick="updateStatus(this, 1)">مقبول</button>
+                <button class="reject" onclick="updateStatus(this, 3)">مرفوض</button>
+                <button class="modify" onclick="updateStatus(this, 2)">تعديل</button>
+              </td>
+            </tr>
+            <tr>
+              <td>نور عبد الرحمن</td>
+              <td>وزارة الاتصالات</td>
+              <td><button onclick="window.location.href='report2.pdf'">تحميل التقرير</button></td>
+              <td>تمت الموافقة</td>
+              <td class="actions">
+                <button class="approve" onclick="updateStatus(this, 1)">مقبول</button>
+                <button class="reject" onclick="updateStatus(this, 3)">مرفوض</button>
+                <button class="modify" onclick="updateStatus(this, 2)">تعديل</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- طلبات التدريب 2 -->
+      <section id="training-evaluations" class="table-section">
+        <h2>طلبات التدريب 2</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>رقم الطالب</th>
+              <th>اسم الجهة</th>
+              <th>نوع التدريب</th>
+              <th>الحالة</th>
+              <th>خيارات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>100123</td>
+              <td>جامعة الأميرة سمية</td>
+              <td>صيفي</td>
+              <td>معلق</td>
+              <td class="actions">
+                <button class="approve" onclick="updateStatus(this, 1)">مقبول</button>
+                <button class="reject" onclick="updateStatus(this, 3)">مرفوض</button>
+                <button class="modify" onclick="updateStatus(this, 2)">تعديل</button>
+              </td>
+            </tr>
+            <tr>
+              <td>100456</td>
+              <td>شركة أمنية</td>
+              <td>فصل دراسي</td>
+              <td>تم الإرسال</td>
+              <td class="actions">
+                <button class="approve" onclick="updateStatus(this, 1)">مقبول</button>
+                <button class="reject" onclick="updateStatus(this, 3)">مرفوض</button>
+                <button class="modify" onclick="updateStatus(this, 2)">تعديل</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- قسم المواعيد -->
+      <section id="appointments" class="table-section">
+        <h2>المواعيد</h2>
+        <table id="appointments-table">
+          <thead>
+            <tr>
+              <th>اسم الطالب</th>
+              <th>التاريخ</th>
+              <th>الوقت</th>
+              <th>الحالة</th>
+              <th>خيارات</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- تفاصيل الطلاب -->
+      <section id="details" class="table-section">
+        <h2>تفاصيل الطلاب</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>رقم الطالب</th>
+              <th>اسم الطالب</th>
+              <th>رقم المشروع</th>
+              <th>حالة المشروع</th>
+              <th>خيارات</th>
+            </tr>
+          </thead>
+          <tbody id="student-details-body"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- نافذة منبثقة -->
+  <div id="popup" class="modal">
+    <div class="modal-content">
+      <h2>إضافة ملاحظات</h2>
+      <textarea id="notes" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+      <div class="buttons">
+        <button onclick="saveNote()" class="btn save">حفظ</button>
+        <button onclick="closePopup()" class="btn cancel">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="dach_test.js"></script>
+</body>
+</html>

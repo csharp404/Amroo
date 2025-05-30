@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نموذج طلب موافقة تدريب ميداني</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 900px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 28px;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      color: #2980b9;
+      font-size: 20px;
+      margin-bottom: 20px;
+      border-right: 4px solid #3498db;
+      padding-right: 10px;
+    }
+
+    .label-input-pair {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .label-input-pair label {
+      width: 200px;
+      font-weight: bold;
+      color: #34495e;
+      font-size: 15px;
+    }
+
+    .label-input-pair input,
+    .label-input-pair textarea {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #bdc3c7;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #2c3e50;
+      transition: border-color 0.3s ease;
+    }
+
+    .label-input-pair input:focus,
+    .label-input-pair textarea:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    button {
+      background: linear-gradient(90deg, #3498db, #2980b9);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #2980b9, #3498db);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <form class="form-container" id="internship-form">
+    <h1>نموذج طلب موافقة تدريب ميداني</h1>
+
+    <!-- بيانات الطالب -->
+    <h2>بيانات الطالب</h2>
+    <div class="label-input-pair">
+      <label>الاسم:</label>
+      <input type="text" name="studentName" placeholder="أدخل اسم الطالب">
+    </div>
+
+    <div class="label-input-pair">
+      <label>فصل التدريب:</label>
+      <input type="number" name="trainingSemester" placeholder="أدخل فصل التدريب">
+    </div>
+    <div class="label-input-pair">
+      <label>رقم الهاتف:</label>
+      <input type="text" name="phone" placeholder="أدخل رقم الهاتف">
+    </div>
+
+    <!-- بيانات الجهة المدربة -->
+    <h2>بيانات الجهة المدربة</h2>
+    <div class="label-input-pair">
+      <label>اسم المؤسسة / الشركة:</label>
+      <input type="text" name="institutionName" placeholder="أدخل اسم المؤسسة">
+    </div>
+    <div class="label-input-pair">
+      <label>رقم الهاتف:</label>
+      <input type="text" name="institutionPhone" placeholder="أدخل رقم الهاتف">
+    </div>
+    <div class="label-input-pair">
+      <label>العنوان:</label>
+      <input type="text" name="address" placeholder="أدخل العنوان">
+    </div>
+    <div class="label-input-pair">
+      <label>اسم مشرف التدريب:</label>
+      <input type="text" name="supervisorName" placeholder="أدخل اسم المشرف">
+    </div>
+    <div class="label-input-pair">
+      <label>وظيفة المشرف:</label>
+      <input type="text" name="supervisorJob" placeholder="أدخل وظيفة المشرف">
+    </div>
+
+    <!-- وصف التدريب -->
+    <h2>وصف التدريب</h2>
+    <div class="label-input-pair">
+      <label>وصف التدريب ومجاله:</label>
+      <textarea name="description" placeholder="اكتب وصف التدريب ومجاله هنا..."></textarea>
+    </div>
+    <div class="label-input-pair">
+      <label>تاريخ بداية التدريب المتوقع:</label>
+      <input type="date" name="startDate">
+    </div>
+    <div class="label-input-pair">
+      <label>تاريخ نهاية التدريب المتوقع:</label>
+      <input type="date" name="endDate">
+    </div>
+    <div class="label-input-pair">
+      <label>هل يتوفر قسم حاسوب أو شعبة حاسوب:</label>
+      <input type="checkbox" name="hasComputerDepartment">
+    </div>
+
+    <button type="submit">إرسال النموذج</button>
+  </form>
+
+  <!-- JavaScript to handle form submission -->
+  <script>
+    function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+    function getToken() {
+  const cookieToken = getCookie('token');
+  const localStorageToken = localStorage.getItem('token');
+  return cookieToken || localStorageToken;
+}
+    const token = getToken();
+    document.getElementById('internship-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const form = document.forms[0];
+
+      // Map the current form fields to the required schema
+      const payload = {
+        semeterNumber: parseInt(form.trainingSemester.value),
+        companyName: form.institutionName.value.trim(),
+        description: form.description.value.trim(),
+        phoneNumber: form.phone.value.trim(),
+        address: form.address.value.trim(),
+        superVisor: form.supervisorName.value.trim(),
+        superVisorJobTitle: form.supervisorJob.value.trim(),
+        startDate: new Date(form.startDate.value).toISOString(),
+        endDate: new Date(form.endDate.value).toISOString(),
+        isThereItDepartment: form.hasComputerDepartment.checked
+      };
+
+      // Validate required fields
+      if (!payload.semeterNumber  || !payload.companyName ||
+          !payload.description || !payload.superVisor || !payload.superVisorJobTitle ||
+          !payload.startDate || !payload.endDate) {
+        alert("يرجى ملء جميع الحقول الإلزامية!");
+        return;
+      }
+console.log(payload);
+      fetch("https://localhost:7133/api/Internship/Create-Internship", {
+        method: "POST",
+        headers: {
+          'authorization':`Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        alert("تم إرسال البيانات بنجاح!");
+        form.reset();
+      })
+      .catch(error => {
+        console.error("حدث خطأ أثناء الإرسال:", error);
+        alert("فشل في إرسال البيانات. يرجى المحاولة لاحقًا.");
+      });
+    });
+  </script>
+
+</body>
+</html>

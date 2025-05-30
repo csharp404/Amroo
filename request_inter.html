@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نموذج طلب موافقة تدريب ميداني</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 900px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 28px;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      color: #2980b9;
+      font-size: 20px;
+      margin-bottom: 20px;
+      border-right: 4px solid #3498db;
+      padding-right: 10px;
+    }
+
+    .label-input-pair {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .label-input-pair label {
+      width: 200px;
+      font-weight: bold;
+      color: #34495e;
+      font-size: 15px;
+    }
+
+    .label-input-pair input,
+    .label-input-pair textarea {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #bdc3c7;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #2c3e50;
+      background-color: #f9f9f9;
+      cursor: not-allowed;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    button {
+      background: #bdc3c7;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: not-allowed;
+      display: block;
+      margin: 30px auto 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <form class="form-container" id="internship-form">
+    <h1>نموذج طلب موافقة تدريب ميداني</h1>
+
+    <!-- بيانات الطالب -->
+    <h2>بيانات الطالب</h2>
+    <div class="label-input-pair">
+      <label>الاسم:</label>
+      <input type="text" name="studentName" id="studentName" readonly>
+    </div>
+
+    <div class="label-input-pair">
+      <label>فصل التدريب:</label>
+      <input type="number" name="trainingSemester" id="trainingSemester" readonly>
+    </div>
+    <div class="label-input-pair">
+      <label>رقم الهاتف:</label>
+      <input type="text" name="phone" id="phone" readonly>
+    </div>
+
+    <!-- بيانات الجهة المدربة -->
+    <h2>بيانات الجهة المدربة</h2>
+    <div class="label-input-pair">
+      <label>اسم المؤسسة / الشركة:</label>
+      <input type="text" name="institutionName" id="institutionName" readonly>
+    </div>
+    <div class="label-input-pair">
+      <label>رقم الهاتف:</label>
+      <input type="text" name="institutionPhone" id="institutionPhone" readonly>
+    </div>
+    <div class="label-input-pair">
+      <label>العنوان:</label>
+      <input type="text" name="address" id="address" readonly>
+    </div>
+    <div class="label-input-pair">
+      <label>اسم مشرف التدريب:</label>
+      <input type="text" name="supervisorName" id="supervisorName" readonly>
+    </div>
+    <div class="label-input-pair">
+      <label>وظيفة المشرف:</label>
+      <input type="text" name="supervisorJob" id="supervisorJob" readonly>
+    </div>
+
+    <!-- وصف التدريب -->
+    <h2>وصف التدريب</h2>
+    <div class="label-input-pair">
+      <label>وصف التدريب ومجاله:</label>
+      <textarea name="description" id="description" readonly></textarea>
+    </div>
+    <div class="label-input-pair">
+      <label>تاريخ بداية التدريب المتوقع:</label>
+      <input type="date" name="startDate" id="startDate" readonly>
+    </div>
+    <div class="label-input-pair">
+      <label>تاريخ نهاية التدريب المتوقع:</label>
+      <input type="date" name="endDate" id="endDate" readonly>
+    </div>
+    <div class="label-input-pair">
+      <label>هل يتوفر قسم حاسوب أو شعبة حاسوب:</label>
+      <input type="checkbox" name="hasComputerDepartment" id="hasComputerDepartment" disabled>
+    </div>
+
+    <button type="submit">إرسال النموذج</button>
+  </form>
+
+  <!-- JavaScript to fetch data and populate form -->
+  <script>
+  // Helper functions
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  function getToken() {
+    return getCookie('token') || localStorage.getItem('token');
+  }
+
+  async function loadData() {
+    const studentId = getQueryParam('stdnum');
+    if (!studentId) {
+      alert("لم يتم العثور على رقم الطالب");
+      return;
+    }
+
+    const token = getToken();
+    try {
+      const response = await fetch(`https://localhost:7133/api/Internship/Get-Internship-By-Student-ID?stdnum=${studentId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) throw new Error('فشل في جلب البيانات');
+
+      const data = await response.json();
+
+      // Populate form fields
+      document.getElementById('studentName').value = data.student?.fullName || "غير متاح";
+      document.getElementById('trainingSemester').value = data.semeterNumber;
+      document.getElementById('phone').value = data.phoneNumber;
+      document.getElementById('institutionName').value = data.companyName;
+      document.getElementById('institutionPhone').value = data.phoneNumber;
+      document.getElementById('address').value = data.address;
+      document.getElementById('supervisorName').value = data.superVisor;
+      document.getElementById('supervisorJob').value = data.superVisorJobTitle;
+      document.getElementById('description').value = data.description;
+
+      document.getElementById('startDate').value = new Date(data.startDate).toISOString().split('T')[0];
+      document.getElementById('endDate').value = new Date(data.endDate).toISOString().split('T')[0];
+
+      document.getElementById('hasComputerDepartment').checked = data.isThereItDepartment;
+
+    } catch (error) {
+      console.error('Error loading data:', error);
+      alert("حدث خطأ أثناء تحميل بيانات الطالب.");
+    }
+  }
+
+  window.onload = loadData;
+</script>
+
+</body>
+</html>

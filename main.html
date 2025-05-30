@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="image/png" href="standard_jpg.jpg">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e3e3e3 , #e3e3e3 );
+            min-height: 100vh;
+            direction: rtl; /* الافتراضي: الكتابة من اليمين لليسار */
+            padding-top: 70px; /* Add padding to account for fixed navbar height */
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #0193a0;
+            display: flex;
+            justify-content: space-between; /* عشان الكبسات في النص والـ Language على اليمين */
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure navbar stays on top */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        .dropbtn, button {
+            background: linear-gradient(90deg, #0193a0, white);
+            color: black;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dropbtn:hover, button:hover {
+            background: linear-gradient(90deg, white, #0193a0);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #0193a0;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #e3e3e3;
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .card {
+            background-color: #e3e3e3 ;
+            padding: 20px;
+            margin: 40px ;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            direction: rtl; /* الافتراضي: الكتابة من اليمين لليسار */
+        }
+
+        .ltr .card {
+            direction: ltr; /* عند الترجمة: الكتابة من اليسار لليمين */
+        }
+
+        /* زر Ask Your Doctor - ستايل جديد */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, #0193a0, white);
+            color: black;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-button i {
+            font-size: 24px;
+        }
+
+        .chat-button:hover {
+            background: linear-gradient(90deg, white, #0193a0);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* نافذة الشات الجديدة */
+        .chat-window {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 320px;
+            height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, #0193a0, white);
+            color: black;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header .close-chat {
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #0193a0;
+            color: white;
+            margin-left: auto;
+        }
+
+        .doctor-message {
+            background-color: #e3e3e3;
+            color: black;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e3e3e3;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            background: linear-gradient(90deg, #0193a0, white);
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background: linear-gradient(90deg, white, #0193a0);
+        }
+
+        /* خلفية الـ Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        /* تنبيه وجود رسالة جديدة */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* ستايل حالة اتصال الدكتور */
+        .doctor-status {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #2ecc71;
+            margin-right: 5px;
+        }
+
+        /* Adding style for the common questions title */
+        .common-question {
+            text-align: center;
+            margin-top: 20px;
+            color: #0193a0;
+            font-size: 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="navbar">
+        <!-- مسافة فاضية على اليسار عشان النص يتوزن -->
+        <div style="flex: 1;"></div>
+        <!-- تجميع Grad Project وInternship في النص -->
+        <div style="display: flex; gap: 20px;">
+            <div class="dropdown">
+                <button class="dropbtn">مشروع التخرج</button>
+                <div class="dropdown-content">
+                    <a href="proposal.html">الوصف المبدئي للمشروع</a>
+                    <a href="docu.html">وثائق المشاريع</a>
+                    <a href="apointment.html">طلب اجتماع </a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">التدريب الميداني</button>
+                <div class="dropdown-content">
+                    <a href="requestintren.html">طلب تدريب</a>
+                    <a href="testp2.html">نموذج طلب الموافقة على التدريب الميداني</a>
+                    <a href="testp.html">نموذج تقرير التدريب الميداني</a>
+                    <a href="testp3.html">نموذج تقييم التدريب الميداني للطلاب</a>
+                </div>
+            </div>
+        </div>
+        <!-- Dropdown الـ Language على اليمين مع مسافة صغيرة -->
+        <div class="dropdown" style="margin-left: 20px; flex: 1; text-align: right;">
+            <div class="dropdown-content" style="right: 0;">
+                <a href="#" onclick="setLanguage('english')"><img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/gb.svg" width="20" height="15" style="margin-right: 10px;"> English</a>
+                <a href="#" onclick="setLanguage('arabic')"><img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/jo.svg" width="20" height="15" style="margin-right: 10px;"> عربي</a>
+            </div>
+        </div>
+        <!-- زر تسجيل الخروج -->
+        <button class="dropbtn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+    </div>
+
+    <h3 class="common-question" id="common-questions-title">الأسئلة الشائعة والأجوبة</h3>
+
+    <div class="card" id="card1">
+        <h3 id="q1">س: ما المهارات التي يمكنني اكتسابها من التدريب؟</h3><br>
+        <p id="a1">ج: التدريبات تساعد في تطوير المهارات التقنية، المعرفة الصناعية، الاتصال، حل المشكلات، العمل الجماعي، إدارة الوقت، وغالبًا ما توفر فهماً عملياً للبيئة المهنية.</p>
+    </div>
+    <br>
+
+    <div class="card" id="card2">
+        <h3 id="q2">س: لماذا يعتبر التدريب مهمًا للطلاب؟</h3><br>
+        <p id="a2">ج: التدريبات توفر تجربة عملية، مما يساعد الطلاب على تطبيق المعرفة النظرية في سيناريوهات العالم الحقيقي. تعزز المهارات التقنية وقد تؤدي إلى عروض عمل.</p>
+    </div>
+    <br>
+
+    <div class="card" id="card3">
+        <h3 id="q3">س: ما هي الفكرة الرئيسية للمشروع؟</h3><br>
+        <p id="a3">ج: الفكرة الرئيسية للمشروع هي تقديم نظرة عامة مفصلة عن المشكلة التي يتم معالجتها، منهج الحل، وأهداف المشروع. يجب أن يوضح الهدف من المشروع ونتائجه المتوقعة.</p>
+    </div>
+    <br>
+
+    <div class="card" id="card4">
+        <h3 id="q4">س: ما هو الجدول الزمني للمشروع؟</h3><br>
+        <p id="a4">ج: الجدول الزمني للمشروع يحدد المعالم الرئيسية والمواعيد النهائية، بما في ذلك تخطيط المشروع، البحث، التطوير، الاختبار، وتواريخ التقديم. يساعد في تتبع التقدم وضمان الإنجاز في الوقت المحدد.</p>
+    </div>
+    <br>
+    <div class="card" id="card5">
+        <h3 id="q5">س: هل يمكن أن يؤدي التدريب إلى الحصول على عرض عمل؟</h3><br>
+        <p id="a5">ج: نعم، تعمل العديد من برامج التدريب المهني كمسار للحصول على وظيفة بدوام كامل. غالبًا ما تقوم الشركات بتوظيف المتدربين ذوي الأداء الأفضل بعد تخرجهم، لأنهم على دراية بثقافة الشركة وعملها.</p>
+    </div>
+    <br>
+    <div class="card" id="card6">
+        <h3 id="q6">س: ماذا يجب أن أدرج في طلب التدريب الخاص بي؟</h3><br>
+        <p id="a6">ج: يجب أن يتضمن طلب التدريب الخاص بك سيرتك الذاتية المحدثة، وخطاب تقديمي مصمم خصيصًا للمنصب، وأي مستندات داعمة مثل السجلات أو المراجع.</p>
+    </div>
+    <br>
+    <div class="card" id="card7">
+        <h3 id="q7">س: كيف يمكنني تحقيق أقصى استفادة من فترة تدريبي؟</h3><br>
+        <p id="a7">ج: كن استباقيًا، واطرح الأسئلة، واطلب الملاحظات، وتواصل مع الزملاء والموجهين. اغتنم كل فرصة للتعلم والمساهمة في الفريق.</p>
+    </div>
+    <br>
+    <div class="card" id="card8">
+        <h3 id="q8">س: ماذا يجب أن أفعل بعد الانتهاء من التدريب؟</h3><br>
+        <p id="a8">ج: بعد الانتهاء من التدريب، تأكد من إرسال رسالة شكر، والتفكير في التجربة، والبقاء على اتصال مع مرشديك وزملائك. يمكن أن يساعدك هذا في بناء علاقات مهنية طويلة الأمد.</p>
+    </div>
+    <br>
+    <div class="card" id="card9">
+        <h3 id="q9">س: كيف أختار موضوع جيد لمشروع تخرجي؟</h3><br>
+        <p id="a9">ج: اختر موضوعًا يتماشى مع اهتماماتك ونقاط قوتك وأهدافك المهنية. يجب أن يكون الموضوع ذا صلة وقابلاً للتنفيذ ويسمح بالقدر الكافي من البحث والتطوير.</p>
+    </div>
+    <br>
+    <div class="card" id="card10">
+        <h3 id="q10">س: كيف أضمن جودة مشروعي؟</h3><br>
+        <p id="a10">ج: ركز على البحث الشامل، وتحليل البيانات بدقة، والكتابة الواضحة، والهيكل المنظم جيدًا. راجع عملك ونقحه بانتظام، واطلب الملاحظات من المشرف الخاص بك.</p>
+    </div>
+    <footer style="text-align: center; background-color: #0193a0; color: white; padding: 10px 0;" id="footer-content">
+        <div class="cardS1">
+            <p>© 2023 أنظمة إدارة المشاريع والتدريب الميداني. كل الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- زر الشات الجديد -->
+    <button class="chat-button" onclick="toggleChat()">
+        <i class="fas fa-comment-dots"></i>
+        <div class="notification-badge" id="notificationBadge" style="display: none;">1</div>
+    </button>
+
+    <!-- نافذة الشات الجديدة -->
+    <div class="chat-window" id="chatWindow" style="display: none;">
+        <div class="chat-header">
+            <div>
+                <div id="chat-header-title">اسأل استاذك</div>
+                <div class="doctor-status">
+                </div>
+            </div>
+            <span class="close-chat" onclick="toggleChat()">×</span>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message doctor-message">
+                مرحبا! كيف يمكنني مساعدتك اليوم؟
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userMessage" placeholder="اكتب رسالتك هنا..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
